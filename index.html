@@ -1,0 +1,427 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Little Birthday Surprise 💗</title>
+
+  <style>
+    :root {
+      --pink: #f5b8ce;
+      --soft-pink: #ffe7ef;
+      --cream: #fffaf5;
+      --purple: #d9c8f5;
+      --text: #68475c;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      text-align: center;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+      border: none;
+      border-radius: 28px;
+      padding: 13px 22px;
+      background: #f2b4cc;
+      color: #68475c;
+      box-shadow: 0 5px 14px #d9a8bd44;
+      transition: transform .2s, background .2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      background: #f7c8d9;
+    }
+
+    section { padding: 65px 18px; }
+
+    h1, h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: normal;
+    }
+
+    h1 { font-size: clamp(2.4rem, 8vw, 4.5rem); }
+    h2 { font-size: clamp(2rem, 6vw, 3rem); }
+
+    p { line-height: 1.8; }
+
+    .cover {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      background: linear-gradient(145deg, #ffe6ee, #fff9f3, #eee5ff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      transition: opacity .8s, visibility .8s;
+    }
+
+    .cover.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .big-heart {
+      font-size: 5rem;
+      animation: heartbeat 1.4s infinite;
+    }
+
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background:
+        radial-gradient(circle at 15% 20%, #f9d4e5 0 4px, transparent 5px),
+        radial-gradient(circle at 80% 30%, #ded0fa 0 5px, transparent 6px),
+        linear-gradient(135deg, #fff0f5, #fffaf4, #f2eaff);
+      padding: 50px 20px;
+    }
+
+    .eyebrow { letter-spacing: 3px; font-size: .8rem; }
+
+    .hero p { max-width: 450px; }
+
+    .pill {
+      display: inline-block;
+      padding: 8px 15px;
+      border-radius: 25px;
+      background: white;
+      margin: 5px;
+      font-size: .9rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 20px;
+      max-width: 850px;
+      margin: 35px auto 0;
+    }
+
+    .photo {
+      background: white;
+      padding: 12px 12px 20px;
+      border-radius: 5px;
+      box-shadow: 0 6px 22px #a7839630;
+      transform: rotate(-2deg);
+      transition: transform .3s;
+    }
+
+    .photo:nth-child(even) { transform: rotate(2deg); }
+    .photo:hover { transform: rotate(0) scale(1.03); }
+
+    .photo img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 3px;
+      background: var(--soft-pink);
+    }
+
+    .photo p { margin: 12px 0 0; }
+
+    .letter-card {
+      max-width: 550px;
+      margin: 25px auto;
+      padding: 28px;
+      background: white;
+      border: 1px solid #f5d7e5;
+      border-radius: 22px;
+      box-shadow: 0 10px 35px #bd93ab20;
+    }
+
+    #letter {
+      display: none;
+      white-space: pre-line;
+      text-align: left;
+      line-height: 1.9;
+      margin-top: 24px;
+    }
+
+    #letter.open { display: block; animation: appear .6s; }
+
+    .cake {
+      font-size: 6rem;
+      margin: 15px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .candle { display: inline-block; font-size: 2rem; }
+
+    .flame {
+      display: inline-block;
+      animation: flicker .7s infinite alternate;
+    }
+
+    .flame.off {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .final {
+      background: linear-gradient(135deg, #ffe5ef, #f1e8ff);
+    }
+
+    footer { padding: 30px 15px; font-size: .85rem; }
+
+    .heart {
+      position: fixed;
+      bottom: -30px;
+      pointer-events: none;
+      z-index: 5;
+      animation: rise 4s linear forwards;
+    }
+
+    @keyframes heartbeat {
+      50% { transform: scale(1.12); }
+    }
+
+    @keyframes float {
+      50% { transform: translateY(-9px); }
+    }
+
+    @keyframes flicker {
+      to { transform: rotate(8deg) scale(1.1); }
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes rise {
+      to { transform: translateY(-110vh) rotate(25deg); opacity: 0; }
+    }
+
+    @media (max-width: 480px) {
+      section { padding: 50px 16px; }
+      .gallery { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .photo img { height: 160px; }
+      .photo { padding: 8px 8px 13px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Opening surprise -->
+  <div class="cover" id="cover">
+    <div class="big-heart">💗</div>
+    <p class="eyebrow">A LITTLE SOMETHING FOR YOU</p>
+    <h1>Hey, birthday Boy! 🎀</h1>
+    <p>I made a tiny corner of the internet just for you.</p>
+    <button onclick="openSurprise()">Open your surprise ✨</button>
+    <p style="font-size:.8rem">Made with love, just for you ♡</p>
+  </div>
+
+  <!-- Main greeting -->
+  <section class="hero" id="home">
+    <span class="pill">♡ your special day ♡</span>
+    <h1>Happy Birthday,<br>Shivam! 🌷</h1>
+    <p>
+      Today the world gets to celebrate someone
+      who makes it a little more beautiful.
+    </p>
+    <p>♡ ♡ ♡</p>
+    <button onclick="document.querySelector('#memories').scrollIntoView()">
+      Let's take a little trip 💌
+    </button>
+  </section>
+
+  <!-- Photo gallery -->
+  <section id="memories">
+    <span class="eyebrow">LITTLE MOMENTS, BIG MEMORIES</span>
+    <h2>Our little scrapbook 📸</h2>
+    <p>A few moments I wish I could keep in a jar forever.</p>
+
+    <div class="gallery">
+      <div class="photo">
+        <img src="C:\Users\Diksha\OneDrive\Desktop\happyBirthday\photo1.jpg.jpeg" alt="A favorite memory"
+             onerror="this.style.display='none'">
+        <p>That day I'll always remember ♡</p>
+      </div>
+
+      <div class="photo">
+        <img src="C:\Users\Diksha\OneDrive\Desktop\happyBirthday\photo2.jpg.jpeg" alt="Another favorite memory"
+             onerror="this.style.display='none'">
+        <p>Your smile = my favorite thing 🌸</p>
+      </div>
+
+      <div class="photo">
+        <img src="C:\Users\Diksha\OneDrive\Desktop\happyBirthday\photo3.jpg.jpeg" alt="A special moment"
+             onerror="this.style.display='none'">
+        <p>One for the memory books ✨</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Personal letter -->
+  <section id="love-letter" style="background:#fff0f5">
+    <span class="eyebrow">SOMETHING FROM MY HEART</span>
+    <h2>A little letter for you 💌</h2>
+
+    <div class="letter-card">
+      <div style="font-size:3rem">💌</div>
+      <p>There's something I wanted to tell you...</p>
+      <button id="letterButton" onclick="toggleLetter()">
+        Open my letter ♡
+      </button>
+
+      <div id="letter">Dear Shivam,
+
+Happy birthday to someone truly special.
+
+I hope this new chapter brings you all the
+little things that make you smile, all the
+adventures your heart dreams about, and
+all the love you deserve.
+
+Thank you for being you. You make ordinary
+moments feel a little more magical, and I
+hope today reminds you how wonderful you are.
+
+Keep smiling, keep dreaming, and never forget
+how special you are to the people around you.
+
+With lots of love,
+Mahi ♡</div>
+    </div>
+  </section>
+
+  <!-- Interactive birthday cake -->
+  <section id="cake-section">
+    <span class="eyebrow">MAKE A WISH</span>
+    <h2>One little birthday cake 🎂</h2>
+    <p>Every candle holds a wish just for you.</p>
+
+    <div class="candles" aria-label="Birthday candles">
+      <span class="candle"><span class="flame">🔥</span></span>
+      <span class="candle"><span class="flame">🔥</span></span>
+      <span class="candle"><span class="flame">🔥</span></span>
+    </div>
+    <div class="cake">🎂</div>
+
+    <button id="candleButton" onclick="blowCandles()">
+      Blow out the candles 🕯️
+    </button>
+    <p id="wishMessage" aria-live="polite"></p>
+  </section>
+
+  <!-- Final surprise -->
+  <section class="final">
+    <div style="font-size:3rem">🎀 ✨ 🌷</div>
+    <h2>One last thing...</h2>
+    <p>
+      I hope your day is filled with happy little moments,
+      warm hugs, beautiful surprises, and everything
+      that makes your heart feel full.
+    </p>
+    <h2>Happy Birthday! 💗</h2>
+    <p>May this year be as lovely as you are.</p>
+    <button onclick="celebrate()">One more surprise! 🎉</button>
+    <p id="finalMessage" aria-live="polite"></p>
+  </section>
+
+  <footer>
+    made with ♡, just for you
+  </footer>
+
+  <!-- Add your own music file to the project folder -->
+  <audio id="music" src="music.mp3" loop preload="none"></audio>
+
+  <script>
+    function openSurprise() {
+      document.getElementById("cover").classList.add("hidden");
+
+      const music = document.getElementById("music");
+      music.play().catch(() => {
+        // The page still works if music cannot play.
+      });
+
+      floatHearts();
+    }
+
+    function toggleLetter() {
+      const letter = document.getElementById("letter");
+      const button = document.getElementById("letterButton");
+      const isOpen = letter.classList.toggle("open");
+
+      button.textContent = isOpen
+        ? "Close my letter ♡"
+        : "Open my letter ♡";
+    }
+
+    let candlesOut = false;
+
+    function blowCandles() {
+      const flames = document.querySelectorAll(".flame");
+      const message = document.getElementById("wishMessage");
+      const button = document.getElementById("candleButton");
+
+      candlesOut = !candlesOut;
+
+      flames.forEach(flame => {
+        flame.classList.toggle("off", candlesOut);
+      });
+
+      if (candlesOut) {
+        message.textContent =
+          "Your wish is on its way to the universe! 🌠💗";
+        button.textContent = "Light them again 🕯️";
+        celebrate();
+      } else {
+        message.textContent = "Make another wish, birthday star! ✨";
+        button.textContent = "Blow out the candles 🕯️";
+      }
+    }
+
+    function floatHearts() {
+      const emojis = ["💗", "💕", "🌸", "✨", "🎀"];
+
+      for (let i = 0; i < 18; i++) {
+        setTimeout(() => {
+          const heart = document.createElement("span");
+          heart.className = "heart";
+          heart.textContent =
+            emojis[Math.floor(Math.random() * emojis.length)];
+          heart.style.left = Math.random() * 100 + "vw";
+          heart.style.fontSize = (16 + Math.random() * 22) + "px";
+          document.body.appendChild(heart);
+
+          setTimeout(() => heart.remove(), 4200);
+        }, i * 130);
+      }
+    }
+
+    function celebrate() {
+      floatHearts();
+      document.getElementById("finalMessage").textContent =
+        "Sending you a million hugs and a million wishes! 💗🎉";
+    }
+  </script>
+
+</body>
+</html>
